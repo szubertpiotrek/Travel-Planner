@@ -123,17 +123,21 @@ class Main extends React.Component{
         });
     }
 
+    handleOnAddDay = () => {
+
+    };
+
     handleOnClickRest = (e,i) => {
-        console.log("klikam")
-        console.log(this.state.clicRestk)
+        console.log("klikam");
+        console.log(this.state.clicRestk);
         this.setState({
             clickRest: i
         })
     };
 
     handleOnClickAttr = (e,i) => {
-        console.log("klikam")
-        console.log(this.state.clickAttr)
+        console.log("klikam");
+        console.log(this.state.clickAttr);
         this.setState({
             clickAttr: i
         })
@@ -171,9 +175,9 @@ class Main extends React.Component{
                     </ul>
                 </nav>
             </div>
-            <div className="col-lg-5">
+            <div className="col-lg-4">
                 <div className="main__plans">
-                    <div className="main__plan--text">plan new day <i className="fas fa-plus-circle"></i></div>
+                    <button className="main__plan--text" onClick={this.handleOnAddDay}>plan new day <i className="fas fa-plus-circle"></i></button>
                     <div className="main__plan">
                     <table className="main__plan--list">
                         <thead>
@@ -192,10 +196,10 @@ class Main extends React.Component{
                     </div>
                 </div>
             </div>
-            <div className="col-lg-5">
+            <div className="col-lg-6">
                 <div className="main__form--table">
-                    <div>
-                        <table className="main__countriesList">
+                    <div className="main__plan-day--tables">
+                        <table className="main__plan-day--table">
                             <thead>
                             <tr>
                                 <th className="main__form--table--header">Attractions</th>
@@ -210,8 +214,8 @@ class Main extends React.Component{
                             </tfoot>
                         </table>
                     </div>
-                    <div>
-                        <table className="main__countriesList">
+                    <div className="main__plan-day--tables">
+                        <table className="main__plan-day--table">
                             <thead>
                             <tr>
                                 <th className="main__form--table--header">Restaurants</th>

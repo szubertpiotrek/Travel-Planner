@@ -83,7 +83,6 @@ class Header extends React.Component{
 
     render(){
         return <header className="header">
-            <div className="container">
                 <div className="row">
                     <div className="col-lg-4">
                         <figure>
@@ -104,7 +103,6 @@ class Header extends React.Component{
                         </form>
                     </div>
                 </div>
-            </div>
         </header>
     }
 }

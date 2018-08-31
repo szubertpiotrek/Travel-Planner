@@ -35,6 +35,9 @@
 
 .header__label{
   margin-left: 30px;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
 }
 
 .header__input{
@@ -404,16 +407,19 @@ tr{
   flex-basis: 40%;
 }
 .main__attractions--info-text{
+  color: white;
   font-weight: 900;
   font-size: 16px;
   padding: 10px;
 }
 .main__attractions--info-adress{
+  color: white;
   font-weight: normal;
   font-size: 15px;
   padding: 10px;
 }
 .main__attractions--info-rating{
+  color: white;
   margin-top: 20px;
   font-size: 15px;
   font-weight: 900;
@@ -623,5 +629,17 @@ tr{
   font-size: 14px;
   margin: 20px 0;
   border-radius: 10px;
-background-color: white;
+  background-color: white;
+}
+
+.main__plan-day--table{
+  padding: 0 20px;
+  flex-basis: 50%;
+  border-spacing: 5px;
+  border: none;
+  background: none;
+}
+
+.main__plan-day--tables{
+  display: flex;
 }
