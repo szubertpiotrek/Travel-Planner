@@ -592,3 +592,7 @@ tr {
 
 .main__plan-day--table {
   width: 200px; }
+
+.footer {
+  background-color: #2b669a;
+  width: 100%; }
