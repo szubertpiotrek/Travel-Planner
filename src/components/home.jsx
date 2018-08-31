@@ -27,7 +27,9 @@ require("../scss/main.scss");
 
 class Footer extends React.Component{
     render(){
-        return <h3>&copy P.Sz.</h3>;
+        return <div className="footer">
+        <h3>&copy P.Sz.</h3>
+        </div>;
     }
 }
 

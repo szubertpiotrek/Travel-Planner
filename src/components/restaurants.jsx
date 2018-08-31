@@ -289,7 +289,7 @@ class restaurants extends React.Component{
 
     render(){
         return <div>
-            <Header/>
+            <Header name={this.props.match.params.name}/>
             <Main name={this.props.match.params.name}/>
             <Footer/>
         </div>

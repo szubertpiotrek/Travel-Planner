@@ -90,7 +90,7 @@ class Header extends React.Component{
                         </figure>
                     </div>
                     <div className="col-lg-8">
-                        <form onSubmit={this.handleOnSubmit} className="header__form" action="/home">
+                        <form onSubmit={this.handleOnSubmit} className="header__form" action="/#/home">
                             <label className="header__label"> Login
                                 <input type="name" value={this.state.login} onChange={this.handleOnLogin}
                                        placeholder="login" className="header__input"/>
