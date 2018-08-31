@@ -1,0 +1,42 @@
+{
+  "name": "r",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack --watch",
+    "dev": "./node_modules/.bin/webpack-dev-server --inline --hot"
+  },
+  "devDependencies": {
+    "babel-preset-stage-2": "^6.24.1",
+    "cors-anywhere": "^0.4.1",
+    "css-loader": "^0.28.10",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.7.2",
+    "postcss-loader": "^2.1.0",
+    "react": "15.4.0",
+    "react-dom": "15.4.0",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1",
+    "@amcharts/amcharts3-react": "^3.0.0"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "dev": "^0.1.3",
+    "firebase": "^5.4.1",
+    "masonry-layout": "^4.2.2",
+    "react-image-lightbox": "^5.0.0",
+    "react-popupbox": "^2.0.8",
+    "react-redux": "^5.0.7",
+    "react-world-map": "^1.0.13"
+  }
+}
