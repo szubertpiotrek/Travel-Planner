@@ -30,7 +30,10 @@
   cursor: pointer; }
 
 .header__label {
-  margin-left: 30px; }
+  margin-left: 30px;
+  color: white;
+  font-size: 20px;
+  font-weight: 900; }
 
 .header__input {
   margin-left: 5px;
@@ -377,16 +380,19 @@ tr {
       flex-basis: 40%; }
 
 .main__attractions--info-text {
+  color: white;
   font-weight: 900;
   font-size: 16px;
   padding: 10px; }
 
 .main__attractions--info-adress {
+  color: white;
   font-weight: normal;
   font-size: 15px;
   padding: 10px; }
 
 .main__attractions--info-rating {
+  color: white;
   margin-top: 20px;
   font-size: 15px;
   font-weight: 900; }
@@ -568,7 +574,12 @@ tr {
 .main__plan {
   background-color: rgba(240, 255, 34, 0.7);
   border-radius: 10px;
-  width: 300px; }
+  width: 300px;
+  height: 50vh;
+  overflow: hidden; }
+
+.main__plans {
+  height: 80vh; }
 
 .main__plan--text {
   text-align: center;
@@ -578,3 +589,6 @@ tr {
   margin: 20px 0;
   border-radius: 10px;
   background-color: white; }
+
+.main__plan-day--table {
+  width: 200px; }

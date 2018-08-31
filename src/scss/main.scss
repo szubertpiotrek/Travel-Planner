@@ -617,9 +617,12 @@ tr{
   background-color: rgba(240, 255, 34,0.7);
   border-radius: 10px;
   width: 300px;
+  height: 50vh;
+  overflow: hidden;
 }
 
 .main__plans{
+  height: 80vh;
 }
 
 .main__plan--text{
@@ -633,13 +636,5 @@ tr{
 }
 
 .main__plan-day--table{
-  padding: 0 20px;
-  flex-basis: 50%;
-  border-spacing: 5px;
-  border: none;
-  background: none;
-}
-
-.main__plan-day--tables{
-  display: flex;
+  width: 200px;
 }

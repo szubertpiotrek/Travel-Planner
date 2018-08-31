@@ -68,7 +68,9 @@ class Main extends React.Component{
             keyRestaurant: [],
             keyAttraction: [],
             clickRest: -1,
-            clickAttr: -1
+            clickAttr: -1,
+            dayList: [],
+            day: [1]
         }
     }
 
@@ -124,7 +126,9 @@ class Main extends React.Component{
     }
 
     handleOnAddDay = () => {
-
+        this.setState({
+            day: [...this.state.day,Number(this.state.day)+1]
+        })
     };
 
     handleOnClickRest = (e,i) => {
@@ -144,11 +148,29 @@ class Main extends React.Component{
     };
 
     render(){
-
+        console.log(this.state.day)
         const style = {
             boxShadow: "inset 2px -5px 25px 0px rgba(43, 102, 154, 1)",
             color: "rgba(240, 255, 34,0.8)"
         };
+
+        const planYourDay = this.state.day.map((el) => {
+            return <div className="main__plan">
+                <table className="main__plan--list">
+                    <thead>
+                    <tr>
+                        <th className="main__form--table--header">Day {el}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <div className="main__scrollList">
+                    </div>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        });
 
         const attractionsList =this.state.attractionsList.map((el,i) => {
             return <tr key={i} onClick={e => this.handleOnClickAttr(e,i)}><td className="main__link--style" style={this.state.clickAttr===i ? style : null}>{el}</td></tr>
@@ -178,27 +200,14 @@ class Main extends React.Component{
             <div className="col-lg-4">
                 <div className="main__plans">
                     <button className="main__plan--text" onClick={this.handleOnAddDay}>plan new day <i className="fas fa-plus-circle"></i></button>
-                    <div className="main__plan">
-                    <table className="main__plan--list">
-                        <thead>
-                        <tr>
-                            <th className="main__form--table--header">Day 1</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <div className="main__scrollList">
-                            {attractionsList}
-                        </div>
-                        </tbody>
-                        <tfoot>
-                        </tfoot>
-                    </table>
+                    <div className="main__scrollList">
+                        {planYourDay}
                     </div>
                 </div>
             </div>
             <div className="col-lg-6">
                 <div className="main__form--table">
-                    <div className="main__plan-day--tables">
+                    <div>
                         <table className="main__plan-day--table">
                             <thead>
                             <tr>
@@ -214,7 +223,7 @@ class Main extends React.Component{
                             </tfoot>
                         </table>
                     </div>
-                    <div className="main__plan-day--tables">
+                    <div>
                         <table className="main__plan-day--table">
                             <thead>
                             <tr>
