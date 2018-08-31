@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5eac05b-1ce3-490d-9beb-161be1154d8a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/introduction.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/introduction.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/planYourWeek.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/planYourWeek.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scss/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/main.scss" afterDir="false" />
-    </list>
+    <list default="true" id="e5eac05b-1ce3-490d-9beb-161be1154d8a" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -19,11 +14,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/scss/main.scss">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="500">
-              <caret line="636" column="19" selection-start-line="636" selection-start-column="19" selection-end-line="636" selection-end-column="19" />
+              <caret line="636" column="16" selection-start-line="636" selection-start-column="16" selection-end-line="636" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -31,8 +38,20 @@
       <file leaf-file-name="planYourWeek.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/planYourWeek.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="200" column="58" selection-start-line="200" selection-start-column="36" selection-end-line="200" selection-end-column="58" />
+            <state relative-caret-position="606">
+              <caret line="217" column="64" selection-start-line="217" selection-start-column="64" selection-end-line="217" selection-end-column="64" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="restaurants.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/restaurants.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="32" column="33" lean-forward="true" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -62,7 +81,6 @@
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/src/components/main.jsx" />
         <option value="$PROJECT_DIR$/src/components/planYourDay.jsx" />
-        <option value="$PROJECT_DIR$/src/app.jsx" />
         <option value="$PROJECT_DIR$/src/components/myTravel.jsx" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/index.html" />
@@ -73,6 +91,7 @@
         <option value="$PROJECT_DIR$/src/components/introduction.jsx" />
         <option value="$PROJECT_DIR$/src/components/planYourWeek.jsx" />
         <option value="$PROJECT_DIR$/src/scss/main.scss" />
+        <option value="$PROJECT_DIR$/src/app.jsx" />
       </list>
     </option>
   </component>
@@ -182,12 +201,12 @@
       <workItem from="1535377381842" duration="1140000" />
       <workItem from="1535378999585" duration="42868000" />
       <workItem from="1535454590412" duration="97453000" />
-      <workItem from="1535621128954" duration="54270000" />
+      <workItem from="1535621128954" duration="54648000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195731000" />
+    <option name="totallyTimeSpent" value="196109000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
@@ -416,16 +435,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="57" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/index.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -449,16 +458,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/restaurants.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3150">
-          <caret line="32" column="33" lean-forward="true" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/introduction.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
@@ -469,20 +468,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/planYourWeek.jsx">
+    <entry file="file://$PROJECT_DIR$/src/scss/main.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="200" column="58" selection-start-line="200" selection-start-column="36" selection-end-line="200" selection-end-column="58" />
+        <state relative-caret-position="500">
+          <caret line="636" column="16" selection-start-line="636" selection-start-column="16" selection-end-line="636" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/restaurants.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="32" column="33" lean-forward="true" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scss/main.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/planYourWeek.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="636" column="19" selection-start-line="636" selection-start-column="19" selection-end-line="636" selection-end-column="19" />
+        <state relative-caret-position="606">
+          <caret line="217" column="64" selection-start-line="217" selection-start-column="64" selection-end-line="217" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
