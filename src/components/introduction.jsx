@@ -8,7 +8,6 @@ import {
     Switch,
     NavLink,
 } from 'react-router-dom';
-import {Home} from './home.jsx';
 
 require("../bootstrap/css/bootstrap.css");
 require("../bootstrap/css/bootstrap-theme.min.css");
@@ -16,7 +15,9 @@ require("../scss/main.scss");
 
 class Footer extends React.Component{
     render(){
-        return <h3>&copy P.Sz.</h3>;
+        return <div className="footer">
+            <h3>&copy P.Sz.</h3>
+        </div>;
     }
 }
 
@@ -90,7 +91,7 @@ class Header extends React.Component{
                         </figure>
                     </div>
                     <div className="col-lg-8">
-                        <form onSubmit={this.handleOnSubmit} className="header__form" action="/home">
+                        <form onSubmit={this.handleOnSubmit} className="header__form" action="/#/home" method="GET">
                             <label className="header__label"> Login
                                 <input type="name" value={this.state.login} onChange={this.handleOnLogin}
                                        placeholder="login" className="header__input"/>
