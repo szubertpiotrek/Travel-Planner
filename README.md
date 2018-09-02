@@ -1,10 +1,8 @@
-# startingPoint
+# Travel-Planner
 
-yarn install albo npm install
-yarn run dev - starujemy server
-yarn run start - sam webpack
+to run this app must install to your browser Access-Control-Allow-Origin plugin in chrome
 
-albo 
+use link https://szubertpiotrek.github.io/Travel-Planner/dist/index.html
 
-npm run dev 
-npm run start
+and enjoy using my app
+
