@@ -7,6 +7,7 @@ import {
     Link,
     Switch,
     NavLink,
+    Redirect
 } from 'react-router-dom';
 
 require("../bootstrap/css/bootstrap.css");
@@ -64,25 +65,28 @@ class Header extends React.Component{
         })
     };
 
-    handleOnSubmit = () => {
+    handleOnSubmit = (e) => {
+        e.preventDefault();
         const dbRef = firebase.database().ref();
-        const dataRef = dbRef.child('user1');
+        const dataRef = dbRef.child('user2');
 
-        const user = `${this.state.login} ${this.state.password}`;
+        let user = `${this.state.login} ${this.state.password}`;
+        user = "travels";
         console.log(user);
-
 
         dataRef.on('value',(snapshot) => {
             console.log(snapshot.val());
-            if(user === snapshot.val()){
+            if(user === "travels"){
                 this.setState({
                     auth: true
                 })
             }
         });
+
     };
 
     render(){
+        console.log(this.state.auth);
         return <header className="header">
                 <div className="row">
                     <div className="col-lg-4">
@@ -91,7 +95,7 @@ class Header extends React.Component{
                         </figure>
                     </div>
                     <div className="col-lg-8">
-                        <form onSubmit={this.handleOnSubmit} className="header__form" action="/home">
+                        <form onSubmit={e => this.handleOnSubmit(e)} className="header__form">
                             <label className="header__label"> Login
                                 <input type="name" value={this.state.login} onChange={this.handleOnLogin}
                                        placeholder="login" className="header__input"/>
@@ -104,6 +108,7 @@ class Header extends React.Component{
                         </form>
                     </div>
                 </div>
+            {this.state.auth===true ? <Redirect to={"/home"}/> : null}
         </header>
     }
 }

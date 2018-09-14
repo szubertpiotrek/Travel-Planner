@@ -22,7 +22,7 @@ require('./scss/main.scss');
 
 class App extends React.Component {
    render() {
-     return <BrowserRouter>
+     return <HashRouter>
            <Switch>
                <Route exact path={'/'} component={Introduction}/>
                <Route path={'/home'} component={Home}/>
@@ -32,7 +32,7 @@ class App extends React.Component {
                <Route path={'/myTravel/:name/restaurants'} component={restaurants}/>
                <Route path={'/myTravel/:name/planYourWeek'} component={planYourWeek}/>
            </Switch>
-       </BrowserRouter>
+       </HashRouter>
    }
  }
 
