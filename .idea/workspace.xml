@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5eac05b-1ce3-490d-9beb-161be1154d8a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/introduction.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/introduction.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -33,7 +31,7 @@
       <file leaf-file-name="introduction.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/introduction.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
+            <state relative-caret-position="380">
               <caret line="93" column="94" selection-start-line="93" selection-start-column="94" selection-end-line="93" selection-end-column="94" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -85,8 +83,8 @@
         <option value="$PROJECT_DIR$/src/components/home.jsx" />
         <option value="$PROJECT_DIR$/src/components/restaurants.jsx" />
         <option value="$PROJECT_DIR$/src/index.html" />
-        <option value="$PROJECT_DIR$/src/components/introduction.jsx" />
         <option value="$PROJECT_DIR$/src/app.jsx" />
+        <option value="$PROJECT_DIR$/src/components/introduction.jsx" />
       </list>
     </option>
   </component>
@@ -197,12 +195,12 @@
       <workItem from="1535378999585" duration="42868000" />
       <workItem from="1535454590412" duration="97453000" />
       <workItem from="1535621128954" duration="65989000" />
-      <workItem from="1536931442253" duration="5634000" />
+      <workItem from="1536931442253" duration="5981000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="213084000" />
+    <option name="totallyTimeSpent" value="213431000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
@@ -501,7 +499,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/introduction.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
+        <state relative-caret-position="380">
           <caret line="93" column="94" selection-start-line="93" selection-start-column="94" selection-end-line="93" selection-end-column="94" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
