@@ -15,6 +15,20 @@
   padding: 10px;
 }
 
+.header__intro{
+  background-image: url("../pattern (2).png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-position-y: -180px;
+  background-color: rgba(43, 102, 154, 1);
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .header__form{
   display: flex;
   flex-direction: row;
@@ -31,18 +45,6 @@
 
 .map-selected:hover, .map-unselected:hover {
   cursor: pointer;
-}
-
-.header__label{
-  margin-left: 30px;
-  color: white;
-  font-size: 20px;
-  font-weight: 900;
-}
-
-.header__input{
-  margin-left: 5px;
-  border-radius: 5px;
 }
 
 .header__button{
@@ -82,7 +84,16 @@
 
 .header__login{
   display: flex;
+  flex-direction: row;
   align-items: center;
+}
+
+.header__login-intro{
+  border-radius: 10px;
+  background-color: rgba(240, 255, 34, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header__logout--link{
@@ -111,16 +122,21 @@
 
 .earth {
   opacity: 0.7;
-  width: 500px;
-  height: 500px;
+  width: 700px;
+  height: 700px;
   position: relative;
-  top: calc(50% - 250px);
-  bottom: calc(50% - 250px);
-  left:  calc(50% - 250px);
-  right:  calc(50% - 250px);
+  top: calc(50% - 350px);
+  bottom: calc(50% - 350px);
+  left:  calc(50% - 350px);
+  right:  calc(50% - 350px);
   overflow: hidden;
   border-radius: 50%;
   box-shadow: 0 0 20px 20px #000 inset, 0 0 20px 2px #000;
+}
+
+.main__earth{
+  display: flex;
+  align-items: flex-start;
 }
 
 .earth:after {
@@ -159,7 +175,7 @@
 
 .main__text{
   position: absolute;
-  top: -60px;
+  top: 0px;
   color: rgba(255,255,255,0.85);
   text-align: center;
   font-size: 120px;

@@ -19,36 +19,26 @@ require("../bootstrap/css/bootstrap.css");
 require("../bootstrap/css/bootstrap-theme.min.css");
 require("../scss/main.scss");
 
-const images = [
-    '//placekitten.com/1500/500',
-    '//placekitten.com/4000/3000',
-    '//placekitten.com/800/1200',
-    '//placekitten.com/1500/1500',
-];
-
 class Header extends React.Component{
 
-    constructor(props){
-        super(props);
-        this.state = {
-            login: "piotrek"
-        }
-    }
+    handleOnLogOut = () => {
+        firebase.auth().signOut()
+    };
 
     render(){
         return <header className="header">
             <div className="row">
                 <div className="col-lg-4">
                     <div className="header__login">
-                        <Link to={`/myTravel/${this.props.name}`} className="header__return--button"><i className="far fa-arrow-alt-circle-left"></i></Link>
+                        <Link to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}`} className="header__return--button"><i className="far fa-arrow-alt-circle-left"></i></Link>
                         <div className="header__login--name">
-                            <h2 className="header__login--name-h2">user: {this.state.login}</h2>
+                            <h2 className="header__login--name-h2">user: {this.props.user}</h2>
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-8">
                     <div className="header__logout">
-                        <NavLink exact to={"/"} className="header__logout--link">Log out</NavLink>
+                        <NavLink exact to={"/"} className="header__logout--link" onClick={this.handleOnLogOut}>Log out</NavLink>
                     </div>
                 </div>
             </div>
@@ -76,7 +66,7 @@ class Main extends React.Component{
 
     componentDidMount(){
 
-        let ref = firebase.database().ref('user2').child('travels');
+        let ref = firebase.database().ref(`${this.props.id}`).child('travels');
         ref.on("value", (snapshot) => {
             if (snapshot.val()) {
                 const ids = snapshot.val();
@@ -103,19 +93,15 @@ class Main extends React.Component{
 
                             arrKeyAttraction = [...arrKeyAttraction,snapshot.child(id[i]).child('attractions').child(keyAttraction[j]).val().attraction];
 
-                            this.setState({
-                                keyAttraction: [...this.state.keyAttraction,keyAttraction[j]]
-                            })
                         }
                         for(let j in keyRestaurant){
 
                             arrKeyRestaurant = [...arrKeyRestaurant,snapshot.child(id[i]).child('restaurants').child(keyRestaurant[j]).val().restaurant];
 
-                            this.setState({
-                                keyRestaurant: [...this.state.keyRestaurant,keyRestaurant[j]]
-                            })
                         }
                         this.setState({
+                            keyAttraction: [...keyAttraction],
+                            keyRestaurant: [...keyRestaurant],
                             attractionsList: arrKeyAttraction,
                             restaurantsList: arrKeyRestaurant
                         });
@@ -186,10 +172,10 @@ class Main extends React.Component{
                     <h1 className="main__h1">{this.props.name}</h1>
                     <ul className="main__list">
                         <li className="main__link">
-                            <NavLink to={`/myTravel/${this.props.name}/attractions`} className="main__link--style">Attractions</NavLink>
+                            <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}/attractions`} className="main__link--style">Attractions</NavLink>
                         </li>
                         <li className="main__link">
-                            <NavLink to={`/myTravel/${this.props.name}/restaurants`} className="main__link--style">Restaurants</NavLink>
+                            <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}/restaurants`} className="main__link--style">Restaurants</NavLink>
                         </li>
                         <li className="main__link">
                             <div className="main__link--style">Plan When&Where</div>
@@ -250,8 +236,8 @@ class planYourWeek extends React.Component{
 
     render(){
         return <div>
-            <Header name={this.props.match.params.name}/>
-            <Main name={this.props.match.params.name}/>
+            <Header name={this.props.match.params.name} id={this.props.match.params.id} user={this.props.match.params.user}/>
+            <Main name={this.props.match.params.name} id={this.props.match.params.id} user={this.props.match.params.user}/>
             <Footer/>
         </div>
     }

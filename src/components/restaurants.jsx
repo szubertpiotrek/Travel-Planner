@@ -21,27 +21,24 @@ require("../scss/main.scss");
 
 class Header extends React.Component{
 
-    constructor(props){
-        super(props);
-        this.state = {
-            login: "piotrek"
-        }
-    }
+    handleOnLogOut = () => {
+        firebase.auth().signOut()
+    };
 
     render(){
         return <header className="header">
             <div className="row">
                 <div className="col-lg-4">
                     <div className="header__login">
-                        <Link to={`/myTravel/${this.props.name}`} className="header__return--button"><i className="far fa-arrow-alt-circle-left"></i></Link>
+                        <Link to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}`} className="header__return--button"><i className="far fa-arrow-alt-circle-left"></i></Link>
                         <div className="header__login--name">
-                            <h2 className="header__login--name-h2">user: {this.state.login}</h2>
+                            <h2 className="header__login--name-h2">user: {this.props.user}</h2>
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-8">
                     <div className="header__logout">
-                        <NavLink exact to={"/"} className="header__logout--link">Log out</NavLink>
+                        <NavLink exact to={"/"} className="header__logout--link" onClick={this.handleOnLogOut}>Log out</NavLink>
                     </div>
                 </div>
             </div>
@@ -69,14 +66,13 @@ class Main extends React.Component{
 
     componentDidMount(){
 
-        let ref = firebase.database().ref('user2').child('travels');
+        let ref = firebase.database().ref(`${this.props.id}`).child('travels');
         ref.on("value", (snapshot) => {
             if (snapshot.val()) {
                 const ids = snapshot.val();
                 const id = Object.keys(ids);
                 console.log(id);
                 for(let i in id){
-
                     if(snapshot.child(id[i]).val().travel===this.props.name){
                         this.setState({
                             id: id[i],
@@ -87,15 +83,12 @@ class Main extends React.Component{
                         const key = Object.keys(keys);
                         let arrKey = [];
                         for(let j in key){
-
                             arrKey = [...arrKey,snapshot.child(id[i]).child('restaurants').child(key[j]).val().restaurant];
-
-                            this.setState({
-                                key: [...this.state.key,key[j]]
-                            })
+                            console.log(arrKey);
                         }
                         this.setState({
                             restaurantsList: arrKey,
+                            key: [...key]
                         });
                     }
                 }
@@ -161,7 +154,7 @@ class Main extends React.Component{
         console.log(this.state.id);
 
         for(let i in this.state.checkRestaurants) {
-            const userData = firebase.database().ref('user2').child('travels').child(`${this.state.id}`).child('restaurants');
+            const userData = firebase.database().ref(`${this.props.id}`).child('travels').child(`${this.state.id}`).child('restaurants');
             userData.push({
                 restaurant: this.state.checkRestaurants[i].name,
             });
@@ -172,14 +165,15 @@ class Main extends React.Component{
     handleOnDelete = (e,i) => {
         const tempTravel = this.state.restaurantsList;
         const tempKey = this.state.key;
+        console.log(tempKey)
         console.log(tempKey[i]);
         console.log(tempTravel);
-        const deleteId= firebase.database().ref(`user2/travels/${this.state.id}/restaurants/${this.state.key[i]}/`);
+        const deleteId= firebase.database().ref(`${this.props.id}/travels/${this.state.id}/restaurants/${tempKey[i]}/`);
         deleteId.remove();
 
         tempTravel.splice(i,1);
         tempKey.splice(i,1);
-
+        console.log(tempTravel);
         this.setState({
             restaurantsList: tempTravel,
             key: tempKey
@@ -227,7 +221,7 @@ class Main extends React.Component{
 
         const restaurantsList =this.state.restaurantsList.map((el,i) => {
             return <li key={i} className="main__submenu">
-                <NavLink to={`/myTravel/${el}`}  className="main__submenu--link">{el}</NavLink>
+                <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${el}`}  className="main__submenu--link">{el}</NavLink>
                 <button className="main__list--delete" onClick={e => this.handleOnDelete(e,i)}><i className="far fa-times-circle main__list--delete--icon"></i></button>
             </li>
         });
@@ -255,7 +249,7 @@ class Main extends React.Component{
                     <h1 className="main__h1">{this.props.name}</h1>
                     <ul className="main__list">
                         <li className="main__link">
-                            <NavLink to={`/myTravel/${this.props.name}/attractions`} className="main__link--style">Attractions</NavLink>
+                            <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}/attractions`} className="main__link--style">Attractions</NavLink>
                         </li>
                         <li className="main__myTravel">
                             <div className="main__attractions--link">Restaurants</div>
@@ -264,7 +258,7 @@ class Main extends React.Component{
                             </ul>
                         </li>
                         <li className="main__link">
-                            <NavLink to={`/myTravel/${this.props.name}/planYourWeek`} className="main__link--style">Plan When&Where</NavLink>
+                            <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}/planYourWeek`} className="main__link--style">Plan When&Where</NavLink>
                         </li>
                     </ul>
                 </nav>
@@ -289,8 +283,8 @@ class restaurants extends React.Component{
 
     render(){
         return <div>
-            <Header name={this.props.match.params.name}/>
-            <Main name={this.props.match.params.name}/>
+            <Header name={this.props.match.params.name} id={this.props.match.params.id} user={this.props.match.params.user}/>
+            <Main name={this.props.match.params.name} id={this.props.match.params.id} user={this.props.match.params.user}/>
             <Footer/>
         </div>
     }

@@ -19,36 +19,26 @@ require("../bootstrap/css/bootstrap.css");
 require("../bootstrap/css/bootstrap-theme.min.css");
 require("../scss/main.scss");
 
-const images = [
-    '//placekitten.com/1500/500',
-    '//placekitten.com/4000/3000',
-    '//placekitten.com/800/1200',
-    '//placekitten.com/1500/1500',
-];
-
 class Header extends React.Component{
 
-    constructor(props){
-        super(props);
-        this.state = {
-            login: "piotrek"
-        }
-    }
+    handleOnLogOut = () => {
+        firebase.auth().signOut()
+    };
 
     render(){
         return <header className="header">
             <div className="row">
                 <div className="col-lg-4">
                     <div className="header__login">
-                        <Link to={`/myTravel/${this.props.name}`} className="header__return--button"><i className="far fa-arrow-alt-circle-left"></i></Link>
+                        <Link to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}`} className="header__return--button"><i className="far fa-arrow-alt-circle-left"></i></Link>
                         <div className="header__login--name">
-                            <h2 className="header__login--name-h2">user: {this.state.login}</h2>
+                            <h2 className="header__login--name-h2">user: {this.props.user}</h2>
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-8">
                     <div className="header__logout">
-                        <NavLink exact to={"/"} className="header__logout--link">Log out</NavLink>
+                        <NavLink exact to={"/"} className="header__logout--link" onClick={this.handleOnLogOut}>Log out</NavLink>
                     </div>
                 </div>
             </div>
@@ -76,7 +66,7 @@ class Main extends React.Component{
 
     componentDidMount(){
 
-        let ref = firebase.database().ref('user2').child('travels');
+        let ref = firebase.database().ref(`${this.props.id}`).child('travels');
         ref.on("value", (snapshot) => {
             if (snapshot.val()) {
                 const ids = snapshot.val();
@@ -94,15 +84,11 @@ class Main extends React.Component{
                         const key = Object.keys(keys);
                         let arrKey = [];
                         for(let j in key){
-
                             arrKey = [...arrKey,snapshot.child(id[i]).child('attractions').child(key[j]).val().attraction];
-
-                            this.setState({
-                                key: [...this.state.key,key[j]]
-                            })
                         }
                             this.setState({
                                 attractionsList: arrKey,
+                                key: [...key]
                             });
                     }
                 }
@@ -168,7 +154,7 @@ class Main extends React.Component{
         console.log(this.state.id);
 
         for(let i in this.state.checkAttractions) {
-            const userData = firebase.database().ref('user2').child('travels').child(`${this.state.id}`).child('attractions');
+            const userData = firebase.database().ref(`${this.props.id}`).child('travels').child(`${this.state.id}`).child('attractions');
             userData.push({
                 attraction: this.state.checkAttractions[i].name,
             });
@@ -181,7 +167,7 @@ class Main extends React.Component{
         const tempKey = this.state.key;
         console.log(tempKey[i]);
         console.log(tempTravel);
-        const deleteId= firebase.database().ref(`user2/travels/${this.state.id}/attractions/${this.state.key[i]}/`);
+        const deleteId= firebase.database().ref(`${this.props.id}/travels/${this.state.id}/attractions/${this.state.key[i]}/`);
         deleteId.remove();
 
         tempTravel.splice(i,1);
@@ -233,7 +219,7 @@ class Main extends React.Component{
 
         const attractionsList =this.state.attractionsList.map((el,i) => {
             return <li key={i} className="main__submenu">
-                <NavLink to={`/myTravel/${el}`} className="main__submenu--link" >{el}</NavLink>
+                <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${el}`} className="main__submenu--link" >{el}</NavLink>
                 <button className="main__list--delete" onClick={e => this.handleOnDelete(e,i)}><i className="far fa-times-circle main__list--delete--icon"></i></button>
             </li>
         });
@@ -267,10 +253,10 @@ class Main extends React.Component{
                             </ul>
                         </li>
                         <li className="main__link">
-                            <NavLink to={`/myTravel/${this.props.name}/restaurants`} className="main__link--style">Restaurants</NavLink>
+                            <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}/restaurants`} className="main__link--style">Restaurants</NavLink>
                         </li>
                         <li className="main__link">
-                            <NavLink to={`/myTravel/${this.props.name}/planYourWeek`} className="main__link--style">Plan When&Where</NavLink>
+                            <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}/planYourWeek`} className="main__link--style">Plan When&Where</NavLink>
                         </li>
                     </ul>
                 </nav>
@@ -296,8 +282,8 @@ class attractions extends React.Component{
 
     render(){
         return <div>
-            <Header name={this.props.match.params.name}/>
-            <Main name={this.props.match.params.name}/>
+            <Header name={this.props.match.params.name} id={this.props.match.params.id} user={this.props.match.params.user}/>
+            <Main name={this.props.match.params.name} id={this.props.match.params.id} user={this.props.match.params.user}/>
             <Footer/>
         </div>
     }

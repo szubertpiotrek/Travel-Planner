@@ -9,18 +9,6 @@ import {
     NavLink,
 } from 'react-router-dom';
 
-var config = {
-    apiKey: "AIzaSyBKHgtr0EAgXkczl_ftsIDlRPFyyUOHwuM",
-    authDomain: "travel-planner-38a29.firebaseapp.com",
-    databaseURL: "https://travel-planner-38a29.firebaseio.com",
-    projectId: "travel-planner-38a29",
-    storageBucket: "",
-    messagingSenderId: "288533296906"
-};
-
-firebase.initializeApp(config);
-
-
 require("../bootstrap/css/bootstrap.css");
 require("../bootstrap/css/bootstrap-theme.min.css");
 require("../scss/main.scss");
@@ -44,7 +32,7 @@ class Main extends React.Component{
     }
 
     componentDidMount(){
-        let ref = firebase.database().ref('user2').child('travels');
+        let ref = firebase.database().ref(`${this.props.id}`).child('travels');
 
         ref.on("value", snapshot => {
             if (snapshot.val()) {
@@ -80,7 +68,7 @@ class Main extends React.Component{
             transform: "rotate(180deg)"
         }
         const travelList =this.state.travel.map((el,i) => {
-            return <li key={i} style={style} className="main__submenu"><NavLink to={`/myTravel/${el}`} className="main__submenu--link" >{el}</NavLink></li>
+            return <li key={i} style={style} className="main__submenu"><NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${el}`} className="main__submenu--link" >{el}</NavLink></li>
         });
 
         return <section className="main">
@@ -88,7 +76,7 @@ class Main extends React.Component{
                 <nav className="main__nav">
                     <ul className="main__list">
                         <li className="main__link">
-                            <NavLink to={"/planTravel"} className="main__link--style">Plan Your Travel</NavLink>
+                            <NavLink to={`/${this.props.id}/${this.props.user}/planTravel`} className="main__link--style">Plan Your Travel</NavLink>
                         </li>
                         <li className="main__myTravel" onClick={this.handleOnClick}>
                             <span className="main__myTravel--text">My Travels</span><i className="fas fa-angle-up" style={this.state.style==="none" ? rotate : null}></i>
@@ -108,12 +96,10 @@ class Main extends React.Component{
 
 class Header extends React.Component{
 
-    constructor(props){
-        super(props);
-        this.state = {
-            login: "piotrek"
-        }
-    }
+    handleOnLogOut = () => {
+        firebase.auth().signOut()
+    };
+
 
     render(){
         return <header className="header">
@@ -121,13 +107,13 @@ class Header extends React.Component{
                 <div className="col-lg-4">
                     <div className="header__login">
                         <div className="header__login--name">
-                            <h2 className="header__login--name-h2">user:  {this.state.login}</h2>
+                            <h2 className="header__login--name-h2">user:  {this.props.user}</h2>
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-8">
                     <div className="header__logout">
-                        <NavLink exact to={"/"} className="header__logout--link">Log out</NavLink>
+                        <NavLink exact to={"/"} className="header__logout--link" onClick={this.handleOnLogOut}>Log out</NavLink>
                     </div>
                 </div>
             </div>
@@ -139,8 +125,8 @@ class Home extends React.Component{
 
     render(){
         return <div>
-            <Header/>
-            <Main/>
+            <Header  id={this.props.match.params.id} user={this.props.match.params.user}/>
+            <Main  id={this.props.match.params.id} user={this.props.match.params.user}/>
             <Footer/>
         </div>
     }

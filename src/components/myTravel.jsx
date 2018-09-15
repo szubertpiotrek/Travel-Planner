@@ -17,27 +17,24 @@ require("../scss/main.scss");
 
 class Header extends React.Component{
 
-    constructor(props){
-        super(props);
-        this.state = {
-            login: "piotrek"
-        }
-    }
+    handleOnLogOut = () => {
+        firebase.auth().signOut()
+    };
 
     render(){
         return <header className="header">
             <div className="row">
                 <div className="col-lg-4">
                     <div className="header__login">
-                        <Link to={`/home`} className="header__return--button"><i className="far fa-arrow-alt-circle-left"></i></Link>
+                        <Link to={`/${this.props.id}/${this.props.user}/home`} className="header__return--button"><i className="far fa-arrow-alt-circle-left"></i></Link>
                         <div className="header__login--name">
-                            <h2 className="header__login--name-h2">user: {this.state.login}</h2>
+                            <h2 className="header__login--name-h2">user: {this.props.user}</h2>
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-8">
                     <div className="header__logout">
-                        <NavLink exact to={"/"} className="header__logout--link">Log out</NavLink>
+                        <NavLink exact to={"/"} className="header__logout--link" onClick={this.handleOnLogOut}>Log out</NavLink>
                     </div>
                 </div>
             </div>
@@ -54,13 +51,13 @@ class Main extends React.Component{
                     <h1 className="main__h1">{this.props.name}</h1>
                     <ul className="main__list">
                         <li className="main__link">
-                            <NavLink to={`/myTravel/${this.props.name}/attractions`} className="main__link--style">Attractions</NavLink>
+                            <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}/attractions`} className="main__link--style">Attractions</NavLink>
                         </li>
                         <li className="main__link">
-                            <NavLink to={`/myTravel/${this.props.name}/restaurants`} className="main__link--style">Restaurants</NavLink>
+                            <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}/restaurants`} className="main__link--style">Restaurants</NavLink>
                         </li>
                         <li className="main__link">
-                            <NavLink to={`/myTravel/${this.props.name}/planYourWeek`} className="main__link--style">Plan When&Where</NavLink>
+                            <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${this.props.name}/planYourWeek`} className="main__link--style">Plan When&Where</NavLink>
                         </li>
                     </ul>
                 </nav>
@@ -76,8 +73,8 @@ class myTravel extends React.Component{
 
     render(){
         return <div>
-            <Header name={this.props.match.params.name}/>
-            <Main name={this.props.match.params.name}/>
+            <Header name={this.props.match.params.name} user={this.props.match.params.user} id={this.props.match.params.id}/>
+            <Main name={this.props.match.params.name} user={this.props.match.params.user} id={this.props.match.params.id}/>
             <Footer/>
         </div>
     }

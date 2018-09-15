@@ -9,10 +9,22 @@ import {
     NavLink,
     Redirect
 } from 'react-router-dom';
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 
 require("../bootstrap/css/bootstrap.css");
 require("../bootstrap/css/bootstrap-theme.min.css");
 require("../scss/main.scss");
+
+var config = {
+    apiKey: "AIzaSyBKHgtr0EAgXkczl_ftsIDlRPFyyUOHwuM",
+    authDomain: "travel-planner-38a29.firebaseapp.com",
+    databaseURL: "https://travel-planner-38a29.firebaseio.com",
+    projectId: "travel-planner-38a29",
+    storageBucket: "travel-planner-38a29.appspot.com",
+    messagingSenderId: "288533296906"
+};
+
+firebase.initializeApp(config);
 
 class Footer extends React.Component{
     render(){
@@ -49,66 +61,49 @@ class Header extends React.Component{
         this.state = {
             login: "",
             password: "",
-            auth: false
+            auth: false,
+            user: "",
+            id: ""
         }
     }
 
-    handleOnLogin = (event) => {
-        this.setState({
-            login: event.target.value
+    uiConfig = {
+        signInFlow: "popup",
+        signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        ],
+        callbacks: {
+            signInSuccess: () => false
+        }
+    };
+
+    componentDidMount(){
+        firebase.auth().onAuthStateChanged(user => {
+            this.setState({
+                auth: !!user,
+                id: user.uid,
+                user: firebase.auth().currentUser.displayName
+            });
+            console.log("user", user);
+            console.log(user.uid)
         })
-    };
-
-    handleOnPassword = (event) => {
-        this.setState({
-            password: event.target.value
-        })
-    };
-
-    handleOnSubmit = (e) => {
-        e.preventDefault();
-        const dbRef = firebase.database().ref();
-        const dataRef = dbRef.child('user2');
-
-        let user = `${this.state.login} ${this.state.password}`;
-        user = "travels";
-        console.log(user);
-
-        dataRef.on('value',(snapshot) => {
-            console.log(snapshot.val());
-            if(user === "travels"){
-                this.setState({
-                    auth: true
-                })
-            }
-        });
-
-    };
+    }
 
     render(){
         console.log(this.state.auth);
-        return <header className="header">
+        return <header className="header__intro">
                 <div className="row">
-                    <div className="col-lg-4">
-                        <figure>
-                            <img/>
-                        </figure>
-                    </div>
-                    <div className="col-lg-8">
-                        <form onSubmit={e => this.handleOnSubmit(e)} className="header__form">
-                            <label className="header__label"> Login
-                                <input type="name" value={this.state.login} onChange={this.handleOnLogin}
-                                       placeholder="login" className="header__input"/>
-                            </label>
-                            <label className="header__label"> Password
-                                <input type="password" value={this.state.password} onChange={this.handleOnPassword}
-                                       placeholder="password" className="header__input"/>
-                            </label>
-                            <input type="submit" value="Sign In" className="header__button"/>
-                        </form>
+                    <div className="col-lg-12">
+                        <div className="header__login-intro">
+                            <StyledFirebaseAuth
+                                uiConfig={this.uiConfig}
+                                firebaseAuth={firebase.auth()}
+                            />
+                        </div>
                     </div>
                 </div>
-            {this.state.auth===true ? <Redirect to={"/home"}/> : null}
+            {this.state.auth===true ? <Redirect to={`/${this.state.id}/${this.state.user}/home`}/> : null}
         </header>
     }
 }

@@ -20,25 +20,26 @@ class Header extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {
-            login: "piotrek"
-        }
     }
+
+    handleOnLogOut = () => {
+        firebase.auth().signOut()
+    };
 
     render(){
         return <header className="header">
             <div className="row">
                 <div className="col-lg-4">
                     <div className="header__login">
-                        <Link to={"/home"} className="header__return--button"><i className="far fa-arrow-alt-circle-left"></i></Link>
+                        <Link to={`/${this.props.id}/${this.props.user}/home`} className="header__return--button"><i className="far fa-arrow-alt-circle-left"></i></Link>
                         <div className="header__login--name">
-                            <h2 className="header__login--name-h2">user: {this.state.login}</h2>
+                            <h2 className="header__login--name-h2">user: {this.props.user}</h2>
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-8">
                     <div className="header__logout">
-                        <NavLink exact to={"/"} className="header__logout--link">Log out</NavLink>
+                        <NavLink exact to={"/"} className="header__logout--link" onClick={this.handleOnLogOut}>Log out</NavLink>
                     </div>
                 </div>
             </div>
@@ -69,7 +70,7 @@ class Main extends React.Component{
     componentDidMount() {
 
 
-        let ref = firebase.database().ref('user2').child('travels');
+        let ref = firebase.database().ref(`${this.props.id}`).child('travels');
 
         ref.on("value", (snapshot) => {
             if (snapshot.val()) {
@@ -118,7 +119,7 @@ class Main extends React.Component{
                 travel: [...this.state.travel,`${this.state.city},${this.state.country}`]
             });
 
-            const userData = firebase.database().ref('user2').child('travels');
+            const userData = firebase.database().ref(`${this.props.id}`).child('travels');
             userData.push ({
                 travel: `${this.state.city},${this.state.country}`,
             });
@@ -152,7 +153,7 @@ class Main extends React.Component{
         const tempId = this.state.id;
         console.log(`${tempId[i]}/`);
 
-        const deleteId= firebase.database().ref(`user2/travels/${tempId[i]}`);
+        const deleteId= firebase.database().ref(`${this.props.id}/travels/${tempId[i]}`);
         deleteId.remove();
 
         tempTravel.splice(i,1);
@@ -180,7 +181,7 @@ class Main extends React.Component{
 
         const travelList =this.state.travel.map((el,i) => {
             return <li key={i} className="main__submenu">
-                <NavLink to={`/myTravel/${el}`} className="main__submenu--link">{el}</NavLink>
+                <NavLink to={`/${this.props.id}/${this.props.user}/myTravel/${el}`} className="main__submenu--link">{el}</NavLink>
                 <button className="main__list--delete" onClick={e => this.handleOnDelete(e,i)}><i className="far fa-times-circle main__list--delete--icon"></i></button>
             </li>
         });
@@ -279,8 +280,8 @@ class planTravel extends React.Component{
 
     render(){
         return <div>
-            <Header/>
-            <Main/>
+            <Header  id={this.props.match.params.id} user={this.props.match.params.user}/>
+            <Main  id={this.props.match.params.id} user={this.props.match.params.user}/>
             <Footer/>
         </div>
     }
