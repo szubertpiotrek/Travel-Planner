@@ -20,7 +20,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-position-y: -180px;
+  background-position-y: -130px;
   background-color: rgba(43, 102, 154, 1);
   padding: 10px;
   display: flex;
@@ -626,22 +626,43 @@ tr{
 }
 
 .main__plan--list{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
 
+.main__plan--table-scroll{
+  height: 200px;
+  overflow-y: auto;
+}
+
+.main__plan--table-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.main__plan--list-scroll{
+  display: flex;
+  flex-direction: row;
+  overflow-y: auto;
+  border-radius: 10px;
+  flex-basis: 50%;
+  padding: 10px 0;
 }
 
 .main__plan{
-  background-color: rgba(240, 255, 34,0.7);
   border-radius: 10px;
-  width: 300px;
-  height: 50vh;
   overflow: hidden;
 }
 
 .main__plans{
-  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
 }
 
 .main__plan--text{
+  flex-basis: 10%;
   text-align: center;
   width: 140px;
   padding: 10px;
@@ -651,8 +672,105 @@ tr{
   background-color: white;
 }
 
+.main__plan--table{
+  flex-basis: 40%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.main__plan--list-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(43, 102, 154, 0.8);
+  border-radius: 10px 10px 0 0;
+}
+
+.main__plan--list-info{
+  height: 20vh;
+  text-align: center;
+  background-color: rgba(240, 255, 34,0.7);
+  border-radius: 0 0 10px 10px;
+  border: 3px solid rgba(43, 102, 154, 0.8);
+  overflow-y: auto;
+}
+
+.main__plan--list-info::-webkit-scrollbar {
+  display: none;
+}
+
 .main__plan-day--table{
-  width: 200px;
+  margin: 20px 0;
+  width: 400px;
+}
+
+.main__plan--list-title-span{
+  font-weight: 900;
+  font-size: 15px;
+  margin: 0 10px;
+  text-align: center;
+}
+
+.main__plan--list-delete{
+  margin: 0 10px;
+  font-size: 15px;
+  border: none;
+  background: none;
+}
+
+.main__plan--list-delete-icon{
+  font-size: 15px;
+  color: rgba(240, 255, 34, 1);
+}
+
+.main__plan--list-delete-item{
+  font-size: 15px;
+  color: rgba(43, 102, 154, 1);
+  transition: 0.5s;
+}
+
+.main__plan--list-delete-item:hover{
+  color: rgba(240, 255, 34, 1);
+  transition: 0.5s;
+}
+
+.main__plan--link-style{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255,255,255,1);
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+.main__plan--link-check{
+  color: green;
+  padding: 10px;
+}
+
+.main__plan--link-false{
+  color: red;
+  padding: 10px;
+}
+
+.main__plan--list-items{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  transition: 0.5s;
+}
+
+.main__plan--list-item{
+  padding: 0 5px;
+}
+
+.main__plan--list-items:hover{
+  background: rgba(43, 102, 154, 0.5);
+  border-radius: 5px;
+  transition: 0.5s;
 }
 
 .footer{

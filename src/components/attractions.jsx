@@ -86,10 +86,10 @@ class Main extends React.Component{
                         for(let j in key){
                             arrKey = [...arrKey,snapshot.child(id[i]).child('attractions').child(key[j]).val().attraction];
                         }
-                            this.setState({
-                                attractionsList: arrKey,
-                                key: [...key]
-                            });
+                        this.setState({
+                            attractionsList: arrKey,
+                            key: [...key]
+                        });
                     }
                 }
             }
@@ -266,7 +266,7 @@ class Main extends React.Component{
                     <ul className="main__attractions--form">
                         {checkboxList}
                     </ul>
-                    <input type="submit" value="Dodaj" className="main__attractions--button"/>
+                    <input type="submit" value="Add" className="main__attractions--button"/>
                 </form>
 
             </div>

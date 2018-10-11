@@ -57,28 +57,80 @@ class Main extends React.Component{
             id: "",
             keyRestaurant: [],
             keyAttraction: [],
-            clickRest: -1,
-            clickAttr: -1,
+            checkRestaurantList: [],
+            checkAttractionList: [],
+            clickRest: [],
+            clickAttr: [],
+            keyDay: [],
+            checkDayList:[],
             dayList: [],
-            day: [1]
+            day: []
         }
     }
 
     componentDidMount(){
-
         let ref = firebase.database().ref(`${this.props.id}`).child('travels');
         ref.on("value", (snapshot) => {
             if (snapshot.val()) {
                 const ids = snapshot.val();
                 const id = Object.keys(ids);
-                console.log(id);
                 for(let i in id){
 
                     if(snapshot.child(id[i]).val().travel===this.props.name){
                         this.setState({
                             id: id[i],
                         });
-                        console.log(id[i]);
+
+                        const keysDay = snapshot.child(id[i]).child('days').val();
+
+                        if(keysDay!==null){
+
+                            const keyDay = Object.keys(keysDay);
+
+                            let arrKeyDay = [];
+
+                            let arrCheckDay = [];
+
+                            for(let j in keyDay){
+
+                                arrKeyDay = [...arrKeyDay,snapshot.child(id[i]).child('days').child(keyDay[j]).val().day];
+                                arrCheckDay = [...arrCheckDay, snapshot.child(id[i]).child('days').child(keyDay[j]).val().day];
+
+                            }
+
+                            if(arrKeyDay!==-1){
+                                this.setState({
+                                    keyDay: [...keyDay],
+                                    checkDayList: [...arrCheckDay],
+                                    day: [...arrKeyDay]
+                                });
+                            }
+
+                        }else{
+                            this.setState({
+                                checkDayList: [[""]],
+                                day: [[""]]
+                            });
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    componentWillMount(){
+
+        let ref = firebase.database().ref(`${this.props.id}`).child('travels');
+        ref.on("value", (snapshot) => {
+            if (snapshot.val()) {
+                const ids = snapshot.val();
+                const id = Object.keys(ids);
+                for(let i in id){
+
+                    if(snapshot.child(id[i]).val().travel===this.props.name){
+                        this.setState({
+                            id: id[i],
+                        });
 
                         const keysAttraction = snapshot.child(id[i]).child('attractions').val();
                         const keyAttraction = Object.keys(keysAttraction);
@@ -89,21 +141,31 @@ class Main extends React.Component{
                         let arrKeyAttraction = [];
                         let arrKeyRestaurant = [];
 
+                        let arrCheckAttraction = [];
+                        let arrCheckRestaurant = [];
+
                         for(let j in keyAttraction){
 
                             arrKeyAttraction = [...arrKeyAttraction,snapshot.child(id[i]).child('attractions').child(keyAttraction[j]).val().attraction];
+                            arrCheckAttraction = [...arrCheckAttraction,(snapshot.child(id[i]).child('attractions').child(keyAttraction[j]).val().check === false ? false : true)];
 
                         }
                         for(let j in keyRestaurant){
 
                             arrKeyRestaurant = [...arrKeyRestaurant,snapshot.child(id[i]).child('restaurants').child(keyRestaurant[j]).val().restaurant];
+                            arrCheckRestaurant = [...arrCheckRestaurant,(snapshot.child(id[i]).child('restaurants').child(keyRestaurant[j]).val().check === false ? false : true)];
 
                         }
+
                         this.setState({
                             keyAttraction: [...keyAttraction],
                             keyRestaurant: [...keyRestaurant],
                             attractionsList: arrKeyAttraction,
-                            restaurantsList: arrKeyRestaurant
+                            restaurantsList: arrKeyRestaurant,
+                            checkRestaurantList: [...arrCheckRestaurant],
+                            checkAttractionList: [...arrCheckAttraction],
+                            clickRest: [...arrCheckRestaurant],
+                            clickAttr: [...arrCheckAttraction]
                         });
                     }
                 }
@@ -113,57 +175,283 @@ class Main extends React.Component{
 
     handleOnAddDay = () => {
         this.setState({
-            day: [...this.state.day,Number(this.state.day)+1]
+            day: [...this.state.day,[""]],
+            checkDayList: [...this.state.checkDayList,[""]]
         })
     };
 
     handleOnClickRest = (e,i) => {
-        console.log("klikam");
-        console.log(this.state.clicRestk);
+
+        let checkRestaurantList = this.state.checkRestaurantList;
+
+        checkRestaurantList[i] = false;
+
         this.setState({
-            clickRest: i
+            checkRestaurantList: [...checkRestaurantList],
         })
     };
 
     handleOnClickAttr = (e,i) => {
-        console.log("klikam");
-        console.log(this.state.clickAttr);
+
+        let checkAttractionList = this.state.checkAttractionList;
+
+        checkAttractionList[i] = false;
+
         this.setState({
-            clickAttr: i
+            checkAttractionList: [...checkAttractionList],
         })
     };
 
+    handleOnCheck = (e,i) => {
+
+        let checkRest = this.state.checkRestaurantList;
+        let checkAttr = this.state.checkAttractionList;
+
+        let clickRest = this.state.clickRest;
+        let clickAttr = this.state.clickAttr;
+
+        let checkDayList = this.state.checkDayList;
+
+        let newCheckDayList = checkDayList[i];
+
+        for(let j in checkRest){
+            if(checkRest[j]===false){
+                if(this.state.checkRestaurantList[j] === false && this.state.clickRest[j] !== false){
+                    newCheckDayList.push(this.state.restaurantsList[j]);
+                }
+                clickRest[j]=false;
+            }
+        }
+
+        for(let j in checkAttr){
+            if(checkAttr[j]===false){
+                if(this.state.checkAttractionList[j] === false && this.state.clickAttr[j] !== false){
+                    newCheckDayList.push(this.state.attractionsList[j]);
+                }
+                clickAttr[j]=false;
+            }
+        }
+
+        this.setState({
+            clickRest: [...clickRest],
+            clickAttr: [...clickAttr],
+            checkDayList: checkDayList
+        })
+
+    };
+
+    handleOnDeleteDay = (e,i) => {
+        const tempDay = this.state.checkDayList;
+        const tempKey = this.state.day;
+        const tempKeyDay = this.state.keyDay;
+
+        let checkAttr = this.state.clickAttr;
+        let checkRest = this.state.clickRest;
+        let checkRestList = this.state.checkRestaurantList;
+        let checkAttrList = this.state.checkAttractionList;
+
+        for(let j in tempDay[i]){
+            this.state.restaurantsList.forEach((el,k) =>{
+                if(tempDay[i][j]===this.state.restaurantsList[k]){
+                    checkRest[k]=true;
+                    checkRestList[k]=true;
+                    const userDataCheckRest = firebase.database().ref(`${this.props.id}/travels/${this.state.id}/restaurants/${this.state.keyRestaurant[k]}/`);
+                    userDataCheckRest.set({
+                        restaurant: this.state.restaurantsList[k],
+                        check: checkRest[k]
+                    });
+
+                }
+            });
+        }
+
+        for(let j in tempDay[i]){
+            this.state.attractionsList.forEach((el,k)=>{
+                if(tempDay[i][j]===this.state.attractionsList[k]){
+                    checkAttr[k] = true;
+                    checkAttrList[k] = true;
+                    const userDataCheckAttr = firebase.database().ref(`${this.props.id}/travels/${this.state.id}/attractions/${this.state.keyAttraction[k]}/`);
+                    userDataCheckAttr.set({
+                        attraction: this.state.attractionsList[k],
+                        check: checkAttr[k]
+                    });
+                }
+            })
+        }
+
+        const deleteDay= firebase.database().ref(`${this.props.id}/travels/${this.state.id}/days/${this.state.keyDay[i]}/`);
+        deleteDay.remove();
+
+        tempDay.splice(i,1);
+        tempKey.splice(i,1);
+        tempKeyDay.splice(i,1);
+        console.log(tempDay);
+        if(tempDay.length>0){
+            this.setState({
+                checkDayList: tempDay,
+                day: tempKey,
+                clickAttr: checkAttr,
+                clickRest: checkRest,
+                checkAttractionList: checkAttrList,
+                checkRestaurantList: checkRestList,
+                keyDay: tempKeyDay
+            })
+        }else{
+            this.setState({
+                checkDayList: [[""]],
+                day: [[""]],
+                clickAttr: checkAttr,
+                clickRest: checkRest,
+                checkAttractionList: checkAttrList,
+                checkRestaurantList: checkRestList,
+                keyDay: tempKeyDay
+            })
+        }
+
+    };
+
+    handleOnDelete = (e,j,i) => {
+        const tempDay = this.state.checkDayList;
+
+        let checkAttr = this.state.clickAttr;
+        let checkRest = this.state.clickRest;
+        let checkAttractionList = this.state.checkAttractionList;
+        let checkRestaurantList = this.state.checkRestaurantList;
+
+        this.state.restaurantsList.forEach((el,k) =>{
+            if(tempDay[i][j]===this.state.restaurantsList[k]){
+                checkRest[k]=true;
+                checkRestaurantList[k]=true;
+                const userDataCheckRest = firebase.database().ref(`${this.props.id}/travels/${this.state.id}/restaurants/${this.state.keyRestaurant[k]}/`);
+                userDataCheckRest.set({
+                    restaurant: this.state.restaurantsList[k],
+                    check: checkRest[k]
+                });
+
+            }
+        });
+        console.log(tempDay[i]);
+
+        this.state.attractionsList.forEach((el,k)=>{
+            if(tempDay[i][j]===this.state.attractionsList[k]){
+                checkAttr[k] = true;
+                checkAttractionList[k] = true;
+                const userDataCheckAttr = firebase.database().ref(`${this.props.id}/travels/${this.state.id}/attractions/${this.state.keyAttraction[k]}/`);
+                userDataCheckAttr.set({
+                    attraction: this.state.attractionsList[k],
+                    check: checkAttr[k]
+                });
+            }
+        })
+
+
+        tempDay[i].splice(j,1);
+        console.log(tempDay[i]);
+
+        this.setState({
+            checkDayList: tempDay,
+            clickAttr: checkAttr,
+            clickRest: checkRest,
+            checkAttractionList: checkAttractionList,
+            checkRestaurantList: checkRestaurantList
+        })
+    };
+
+    handleOnSaveDay = () => {
+        console.log(this.state.checkDayList);
+        for (let i in this.state.checkDayList) {
+
+            const userDataPlan = firebase.database().ref(`${this.props.id}`).child('travels').child(`${this.state.id}`).child('days');
+            userDataPlan.push({
+                day: this.state.checkDayList[i]
+            });
+
+            if (this.state.attractionsList.length > 0) {
+                this.state.checkDayList[i].forEach((el) => {
+                    for(let k in this.state.attractionsList){
+                        if (el === this.state.attractionsList[k]) {
+                            const userDataCheckAttr = firebase.database().ref(`${this.props.id}/travels/${this.state.id}/attractions/${this.state.keyAttraction[k]}/`);
+                            userDataCheckAttr.set({
+                                attraction: this.state.attractionsList[k],
+                                check: this.state.checkAttractionList[k]
+                            });
+                        }
+                    }
+                })
+
+            }
+
+            if(this.state.restaurantsList.length>0){
+                this.state.checkDayList[i].forEach((el) => {
+                    for(let k in this.state.restaurantsList){
+                        if(el===this.state.restaurantsList[k]) {
+                            const userDataCheckRest = firebase.database().ref(`${this.props.id}/travels/${this.state.id}/restaurants/${this.state.keyRestaurant[k]}/`);
+                            userDataCheckRest.set({
+                                restaurant: this.state.restaurantsList[k],
+                                check: this.state.checkRestaurantList[k]
+                            });
+                        }
+                    }
+                })
+
+            }
+
+            const deleteDay= firebase.database().ref(`${this.props.id}/travels/${this.state.id}/days/${this.state.keyDay[i]}/`);
+            deleteDay.remove();
+        }
+
+    };
+
     render(){
-        console.log(this.state.day)
         const style = {
             boxShadow: "inset 2px -5px 25px 0px rgba(43, 102, 154, 1)",
             color: "rgba(240, 255, 34,0.8)"
         };
 
-        const planYourDay = this.state.day.map((el) => {
-            return <div className="main__plan">
-                <table className="main__plan--list">
-                    <thead>
-                    <tr>
-                        <th className="main__form--table--header">Day {el}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <div className="main__scrollList">
+        const dayPlanStyle = {
+            width: this.state.day.length<=4 ? "300px" : `${1200/this.state.day.length}px`
+        };
+
+        const planYourDay = this.state.day.map((el1,i) => {
+            console.log(this.state.day[i]);
+            console.log(this.state.checkDayList[i]);
+            const dayPlanList = this.state.checkDayList[i].map((el2,j) => {
+                if(j>0) {
+                    return <div key={j} className="main__plan--list-items">
+                        <div className="main__plan--list-item">{el2}</div>
+                        <i className="far fa-times-circle main__plan--list-delete-item" onClick={e => this.handleOnDelete(e, j, i)}></i>
                     </div>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
+                }
+            });
+
+            return <div className="main__plan--list" key={i}>
+                <div className="main__plan--list-title" style={dayPlanStyle}>
+                    <span className="main__plan--list-title-span">Day {i+1} ${"data kalendarz"}</span>
+                    <button className="main__plan--list-delete" onClick={e => this.handleOnDeleteDay(e,i)}><i className="far fa-times-circle main__plan--list-delete-icon"></i></button>
+                </div>
+                <div className="main__plan--list-info" onClick={e => this.handleOnCheck(e,i)} style={dayPlanStyle}>
+                    {dayPlanList}
+                </div>
             </div>
+
         });
 
-        const attractionsList =this.state.attractionsList.map((el,i) => {
-            return <tr key={i} onClick={e => this.handleOnClickAttr(e,i)}><td className="main__link--style" style={this.state.clickAttr===i ? style : null}>{el}</td></tr>
+        const attractionsList = this.state.attractionsList.map((el,i) => {
+            return <tr key={i} onClick={e => this.handleOnClickAttr(e,i)}>
+                <td className="main__plan--link-style" style={this.state.checkAttractionList[i]===false ? style : null}>
+                    <span>{el}</span>
+                    {this.state.checkAttractionList[i] === false && this.state.clickAttr[i] === false ? <i className="fas fa-times main__plan--link-false"></i> : <i className="fas fa-check main__plan--link-check"></i>}
+                </td>
+            </tr>
         });
 
         const restaurantsList =this.state.restaurantsList.map((el,i) => {
-            return <tr key={i}  onClick={e => this.handleOnClickRest(e,i)}><td className="main__link--style" style={this.state.clickRest===i ? style : null}>{el}</td></tr>
+            return <tr key={i}  onClick={e => this.handleOnClickRest(e,i)}>
+                <td className="main__plan--link-style" style={this.state.checkRestaurantList[i]===false ? style : null}>
+                    <span>{el}</span>
+                    {this.state.checkRestaurantList[i] === false && this.state.clickRest[i] === false ? <i className="fas fa-times main__plan--link-false"></i> : <i className="fas fa-check main__plan--link-check"></i>}
+                </td>
+            </tr>
         });
 
         return <section className="main">
@@ -183,47 +471,48 @@ class Main extends React.Component{
                     </ul>
                 </nav>
             </div>
-            <div className="col-lg-4">
+            <div className="col-lg-10">
                 <div className="main__plans">
                     <button className="main__plan--text" onClick={this.handleOnAddDay}>plan new day <i className="fas fa-plus-circle"></i></button>
-                    <div className="main__scrollList">
+                    <div className="main__plan--table">
+                        <div>
+                            <table className="main__plan-day--table">
+                                <thead>
+                                <tr>
+                                    <th className="main__form--table--header">Attractions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <div className="main__plan--table-scroll">
+                                    {attractionsList}
+                                </div>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div>
+                            <table className="main__plan-day--table">
+                                <thead>
+                                <tr>
+                                    <th className="main__form--table--header">Restaurants</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <div className="main__plan--table-scroll">
+                                    {restaurantsList}
+                                </div>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div className="main__plan--list-scroll">
                         {planYourDay}
                     </div>
-                </div>
-            </div>
-            <div className="col-lg-6">
-                <div className="main__form--table">
                     <div>
-                        <table className="main__plan-day--table">
-                            <thead>
-                            <tr>
-                                <th className="main__form--table--header">Attractions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <div className="main__scrollList">
-                                {attractionsList}
-                            </div>
-                            </tbody>
-                            <tfoot>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <div>
-                        <table className="main__plan-day--table">
-                            <thead>
-                            <tr>
-                                <th className="main__form--table--header">Restaurants</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <div className="main__scrollList">
-                                {restaurantsList}
-                            </div>
-                            </tbody>
-                            <tfoot>
-                            </tfoot>
-                        </table>
+                        <button onClick={this.handleOnSaveDay} className="main__attractions--button">Save</button>
                     </div>
                 </div>
             </div>

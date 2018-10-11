@@ -17,7 +17,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-position-y: -180px;
+  background-position-y: -130px;
   background-color: #2b669a;
   padding: 10px;
   display: -ms-flexbox;
@@ -596,17 +596,47 @@ tr {
   border-width: 0 5px 5px 0;
   transform: rotate(45deg); }
 
-.main__plan {
-  background-color: rgba(240, 255, 34, 0.7);
+.main__plan--list {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+
+.main__plan--table-scroll {
+  height: 200px;
+  overflow-y: auto; }
+
+.main__plan--table-scroll::-webkit-scrollbar {
+  display: none; }
+
+.main__plan--list-scroll {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  overflow-y: auto;
   border-radius: 10px;
-  width: 300px;
-  height: 50vh;
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%; }
+
+.main__plan {
+  border-radius: 10px;
   overflow: hidden; }
 
 .main__plans {
-  height: 80vh; }
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  height: 100%; }
 
 .main__plan--text {
+  -ms-flex-preferred-size: 10%;
+      flex-basis: 10%;
   text-align: center;
   width: 140px;
   padding: 10px;
@@ -615,8 +645,72 @@ tr {
   border-radius: 10px;
   background-color: white; }
 
+.main__plan--table {
+  -ms-flex-preferred-size: 40%;
+      flex-basis: 40%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: start;
+      justify-content: flex-start; }
+
+.main__plan--list-title {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  background-color: rgba(43, 102, 154, 0.8);
+  border-radius: 10px 10px 0 0; }
+
+.main__plan--list-info {
+  height: 20vh;
+  text-align: center;
+  background-color: rgba(240, 255, 34, 0.7);
+  border-radius: 0 0 10px 10px;
+  border: 3px solid rgba(43, 102, 154, 0.8); }
+
 .main__plan-day--table {
+  margin: 20px 0;
   width: 200px; }
+
+.main__plan--list-title-span {
+  font-weight: 900;
+  font-size: 15px;
+  margin: 0 10px;
+  text-align: center; }
+
+.main__plan--list-delete {
+  margin: 0 10px;
+  font-size: 15px;
+  border: none;
+  background: none; }
+
+.main__plan--list-delete-icon {
+  font-size: 15px;
+  color: #f0ff22; }
+
+.main__plan--link-style {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  transition: 0.4s; }
+
+.main__plan--link-check {
+  color: green;
+  padding: 4px 0; }
+
+.main__plan--link-false {
+  color: red;
+  padding: 4px 0; }
 
 .footer {
   background-color: #2b669a;

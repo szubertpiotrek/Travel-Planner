@@ -268,7 +268,7 @@ class Main extends React.Component{
                     <ul className="main__attractions--form">
                         {checkboxList}
                     </ul>
-                    <input type="submit" value="Dodaj" className="main__attractions--button"/>
+                    <input type="submit" value="Add" className="main__attractions--button"/>
                 </form>
 
             </div>
