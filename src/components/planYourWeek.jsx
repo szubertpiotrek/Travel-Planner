@@ -195,7 +195,7 @@ class Main extends React.Component{
 
         let checkAttractionList = this.state.checkAttractionList;
 
-        checkAttractionList[i] = false;
+        checkAttractionList[i]= checkAttractionList[i] === true? false : true;
 
         this.setState({
             checkAttractionList: [...checkAttractionList],
@@ -426,7 +426,7 @@ class Main extends React.Component{
 
             return <div className="main__plan--list" key={i}>
                 <div className="main__plan--list-title" style={dayPlanStyle}>
-                    <span className="main__plan--list-title-span">Day {i+1} ${"data kalendarz"}</span>
+                    <span className="main__plan--list-title-span">Day {i+1}</span>
                     <button className="main__plan--list-delete" onClick={e => this.handleOnDeleteDay(e,i)}><i className="far fa-times-circle main__plan--list-delete-icon"></i></button>
                 </div>
                 <div className="main__plan--list-info" onClick={e => this.handleOnCheck(e,i)} style={dayPlanStyle}>
@@ -473,7 +473,6 @@ class Main extends React.Component{
             </div>
             <div className="col-lg-10">
                 <div className="main__plans">
-                    <button className="main__plan--text" onClick={this.handleOnAddDay}>plan new day <i className="fas fa-plus-circle"></i></button>
                     <div className="main__plan--table">
                         <div>
                             <table className="main__plan-day--table">
@@ -508,6 +507,7 @@ class Main extends React.Component{
                             </table>
                         </div>
                     </div>
+                    <button className="main__plan--text" onClick={this.handleOnAddDay}>plan new day <i className="fas fa-plus-circle"></i></button>
                     <div className="main__plan--list-scroll">
                         {planYourDay}
                     </div>

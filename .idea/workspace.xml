@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5eac05b-1ce3-490d-9beb-161be1154d8a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/dist/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/attractions.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/attractions.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/planYourWeek.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/planYourWeek.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/restaurants.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/restaurants.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scss/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/main.scss" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -60,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/planTravel.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="245">
-              <caret line="171" column="10" lean-forward="true" selection-start-line="168" selection-start-column="8" selection-end-line="171" selection-end-column="10" />
+              <caret line="171" column="10" selection-start-line="168" selection-start-column="8" selection-end-line="171" selection-end-column="10" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -83,8 +76,8 @@
       <file leaf-file-name="planYourWeek.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/planYourWeek.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="449" column="90" selection-start-line="449" selection-start-column="90" selection-end-line="449" selection-end-column="90" />
+            <state relative-caret-position="270">
+              <caret line="197" column="32" selection-start-line="197" selection-start-column="32" selection-end-line="197" selection-end-column="32" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -235,12 +228,12 @@
       <workItem from="1536931442253" duration="47585000" />
       <workItem from="1537970900564" duration="50223000" />
       <workItem from="1538398185319" duration="54833000" />
-      <workItem from="1539183422901" duration="32787000" />
+      <workItem from="1539183422901" duration="33575000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="392878000" />
+    <option name="totallyTimeSpent" value="393666000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
@@ -606,7 +599,7 @@
     <entry file="file://$PROJECT_DIR$/src/components/planTravel.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
-          <caret line="171" column="10" lean-forward="true" selection-start-line="168" selection-start-column="8" selection-end-line="171" selection-end-column="10" />
+          <caret line="171" column="10" selection-start-line="168" selection-start-column="8" selection-end-line="171" selection-end-column="10" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -615,8 +608,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/planYourWeek.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="449" column="90" selection-start-line="449" selection-start-column="90" selection-end-line="449" selection-end-column="90" />
+        <state relative-caret-position="270">
+          <caret line="197" column="32" selection-start-line="197" selection-start-column="32" selection-end-line="197" selection-end-column="32" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
