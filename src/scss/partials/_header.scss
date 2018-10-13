@@ -1,0 +1,75 @@
+.header{
+  background-color: #2b669a;
+  padding: 10px;
+}
+
+.header__form{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.header__button{
+  margin-left: 10px;
+  border: 2px solid rgb(217, 230, 29);
+  background-color: rgb(240, 255, 34);
+  border-radius: 5px;
+}
+
+.header__return--button{
+  text-decoration: none;
+  color: white;
+  background: none;
+  border: none;
+  padding: 0 10px;
+  font-size: 30px;
+  transition: 0.4s;
+}
+
+.header__return--button:hover{
+  background: none;
+  border: none;
+  padding: 0 10px;
+  font-size: 30px;
+  color: rgba(240, 255, 34, 0.9);
+  transition: 0.4s;
+  transform: scale(1.5);
+}
+
+.header__logout{
+  padding: 0 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 35px;
+}
+
+.header__login{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header__logout--link{
+  font-weight: 900;
+  font-size: 20px;
+  color:white;
+  text-decoration: none;
+}
+
+.header__logout--link:hover{
+  transition: 0.4s;
+  color: rgb(240, 255, 34);
+  text-decoration: none;
+  transform: scale(1.25);
+}
+
+.header__login--name{
+  color: white;
+  padding: 0 20px;
+}
+
+.header__login--name-h2{
+  font-weight: 900;
+  font-size: 25px;
+}
